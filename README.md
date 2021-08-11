@@ -3,14 +3,14 @@
 
 # RAK12010-VEML7700-Library
 
-RAKwireless Arduino Library for the RAK12010 UV light sensor.
+RAKwireless Arduino Library for the RAK12010 Ambient Light sensor.
 
 VEML7700 is a high-accuracy ambient light digital sensor with a 16-bit resolution. It includes a high sensitive photo diode, a low noise amplifier, a 16-bit A/D converter and supports an easy-to-use I2C bus communication interface (I2C address: `0x10`).
 
 # Documentation
 
-* **[Product Repository](https://github.com/RAKWireless/RAK12010-VEML7700-Library)** - Product repository for the RAKWireless RAK12010 UV light sensor.
-* **[Documentation](https://docs.rakwireless.com/Product-Categories/WisBlock/RAK12010/Quickstart/)** - Documentation and Quick Start Guide for the RAK12010 UV light sensor.
+* **[Product Repository](https://github.com/RAKWireless/RAK12010-VEML7700-Library)** - Product repository for the RAKWireless RAK12010 ambient light light sensor.
+* **[Documentation](https://docs.rakwireless.com/Product-Categories/WisBlock/RAK12010/Quickstart/)** - Documentation and Quick Start Guide for the RAK12010 ambient light light sensor.
 
 ## INSTALLATION
 
@@ -49,7 +49,7 @@ In PlatformIO, open PlatformIO Home, switch to libraries and search for RAK12010
 
 ```
 lib_deps =
-  rakwireless/RAKwireless VEML7700 UV light sensor
+  rakwireless/RAKwireless VEML7700 ambient light light sensor
 ```
 
 You can also install it manually:
