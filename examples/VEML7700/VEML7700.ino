@@ -7,7 +7,9 @@
    @copyright Copyright (c) 2021
 **/
 #include "Light_VEML7700.h"
-
+#ifdef RAK4630
+#include <Adafruit_TinyUSB.h>
+#endif
 
 Light_VEML7700 VMEL = Light_VEML7700();
 
