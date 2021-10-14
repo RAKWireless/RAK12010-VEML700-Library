@@ -1,5 +1,5 @@
-#ifndef _RAKWIRELESS_VEML7700_H
-#define _RAKWIRELESS_VEML7700_H
+#ifndef _LIGHT_VEML7700_H
+#define _LIGHT_VEML7700_H
 
 #include "Arduino.h"
 #include <Wire.h>
@@ -37,20 +37,6 @@
 #define VEML7700_POWERSAVE_MODE2 0x01 ///< Power saving mode 2
 #define VEML7700_POWERSAVE_MODE3 0x02 ///< Power saving mode 3
 #define VEML7700_POWERSAVE_MODE4 0x03 ///< Power saving mode 4
-
-//choose a different core board
-#if defined(_VARIANT_RAK4630_)
-#include <Adafruit_I2CDevice.h>
-#include <Adafruit_I2CRegister.h>
-
-#elif defined(_VARIANT_RAK11200_)
-
-#include <Adafruit_I2CDevice.h>
-#include <Adafruit_I2CRegister.h>
-
-#else //RAK11300
-//Rak11300 Don't need Adafruit_I2CDevice.h and Adafruit_I2CRegister.h
-#endif
 
 /*!
       @brief  Class that stores state and functions for interacting with
@@ -90,64 +76,21 @@ class Light_VEML7700 {
     uint8_t receiveData(uint8_t command, uint16_t& data);
     enum { STATUS_OK = 0, STATUS_ERROR = 0xff };
     enum { I2C_ADDRESS = 0x10 };
-    uint8_t gains[4] = { 
-                     VEML7700_GAIN_1_8,
-                     VEML7700_GAIN_1_4,
-                     VEML7700_GAIN_1,
-                     VEML7700_GAIN_2
-                   };
+    uint8_t gains[4] = {
+      VEML7700_GAIN_1_8,
+      VEML7700_GAIN_1_4,
+      VEML7700_GAIN_1,
+      VEML7700_GAIN_2
+    };
     int8_t itimes[6] = {
-                    VEML7700_IT_25MS,
-                    VEML7700_IT_50MS,
-                    VEML7700_IT_100MS,
-                    VEML7700_IT_200MS,
-                    VEML7700_IT_400MS,
-                    VEML7700_IT_800MS
-                   };
-#if defined(_VARIANT_RAK11300_)
-    enum als_gain_t
-    { ALS_GAIN_x1 = 0x0,    // x 1
-      ALS_GAIN_x2 = 0x1,    // x 2
-      ALS_GAIN_d8 = 0x2,    // x 1/8
-      ALS_GAIN_d4 = 0x3
-    };  // x 1/4
-    enum als_itime_t
-    { ALS_INTEGRATION_25ms = 0xc,
-      ALS_INTEGRATION_50ms = 0x8,
-      ALS_INTEGRATION_100ms = 0x0,
-      ALS_INTEGRATION_200ms = 0x1,
-      ALS_INTEGRATION_400ms = 0x2,
-      ALS_INTEGRATION_800ms = 0x3
+      VEML7700_IT_25MS,
+      VEML7700_IT_50MS,
+      VEML7700_IT_100MS,
+      VEML7700_IT_200MS,
+      VEML7700_IT_400MS,
+      VEML7700_IT_800MS
     };
-    enum als_persist_t
-    { ALS_PERSISTENCE_1 = 0x0,
-      ALS_PERSISTENCE_2 = 0x1,
-      ALS_PERSISTENCE_4 = 0x2,
-      ALS_PERSISTENCE_8 = 0x3
-    };
-    enum als_powmode_t
-    { ALS_POWER_MODE_1 = 0x0,
-      ALS_POWER_MODE_2 = 0x1,
-      ALS_POWER_MODE_3 = 0x2,
-      ALS_POWER_MODE_4 = 0x3
-    };
-#endif
   private:
-#if defined(_VARIANT_RAK4630_)
-    Adafruit_I2CRegister *ALS_Config, *ALS_Data, *White_Data, *ALS_HighThreshold,
-                         *ALS_LowThreshold, *Power_Saving, *Interrupt_Status;
-    Adafruit_I2CRegisterBits *ALS_Shutdown, *ALS_Interrupt_Enable,
-                             *ALS_Persistence, *ALS_Integration_Time, *ALS_Gain, *PowerSave_Enable,
-                             *PowerSave_Mode;
-    Adafruit_I2CDevice *i2c_dev;
-#elif defined(_VARIANT_RAK11200_)
-    Adafruit_I2CRegister *ALS_Config, *ALS_Data, *White_Data, *ALS_HighThreshold,
-                         *ALS_LowThreshold, *Power_Saving, *Interrupt_Status;
-    Adafruit_I2CRegisterBits *ALS_Shutdown, *ALS_Interrupt_Enable,
-                             *ALS_Persistence, *ALS_Integration_Time, *ALS_Gain, *PowerSave_Enable,
-                             *PowerSave_Mode;
-    Adafruit_I2CDevice *i2c_dev;
-#else //RAK11300
     typedef uint8_t (Light_VEML7700::*getCountsFunction)(uint16_t& counts);
     enum { COMMAND_ALS_SM = 0x00, ALS_SM_MASK = 0x1800, ALS_SM_SHIFT = 11 };
     enum { COMMAND_ALS_IT = 0x00, ALS_IT_MASK = 0x03c0, ALS_IT_SHIFT = 6 };
@@ -165,6 +108,5 @@ class Light_VEML7700 {
     enum { COMMAND_ALS_IF_L = 0x06, ALS_IF_L_MASK = 0x8000, ALS_IF_L_SHIFT = 15 };
     enum { COMMAND_ALS_IF_H = 0x06, ALS_IF_H_MASK = 0x4000, ALS_IF_H_SHIFT = 14 };
     uint16_t register_cache[4];
-#endif
 };
 #endif

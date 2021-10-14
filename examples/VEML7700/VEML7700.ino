@@ -3,22 +3,21 @@
    @author rakwireless.com
    @brief Measure ambient light.
    @version 0.1
-   @date 2021-7-15
+   @date 2021-10-09
    @copyright Copyright (c) 2021
 **/
 #include "Light_VEML7700.h"
+
 
 Light_VEML7700 VMEL = Light_VEML7700();
 
 void setup()
 {
-  // Initialize Serial for debug output
-
   pinMode(WB_IO2, OUTPUT);
-  digitalWrite(WB_IO2, HIGH);
+  digitalWrite(WB_IO2, HIGH); //Turn on the power switch
   delay(300);
   time_t timeout = millis();
-  Serial.begin(115200);
+  Serial.begin(115200);      // Initialize Serial for debug output
   while (!Serial)
   {
     if ((millis() - timeout) < 5000)
@@ -32,10 +31,10 @@ void setup()
   }
   if (!VMEL.begin())
   {
-    Serial.println("Sensor not found");
+    Serial.println("Didn't find VEML7700");
     while (1);
   }
-
+  Serial.println("Find VEML7700");
   VMEL.setGain(VEML7700_GAIN_1);
   VMEL.setIntegrationTime(VEML7700_IT_800MS);
 
