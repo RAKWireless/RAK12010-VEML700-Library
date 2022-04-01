@@ -64,7 +64,11 @@ void setup()
   //veml.setPowerSaveMode(VEML7700_POWERSAVE_MODE4);
 
   VMEL.setLowThreshold(10000);
+  Serial.print("getLowThreshold: ");
+  Serial.println(VMEL.getLowThreshold());
   VMEL.setHighThreshold(20000);
+  Serial.print("getHighThreshold: ");
+  Serial.println(VMEL.getHighThreshold());
   VMEL.interruptEnable(true);
 }
 

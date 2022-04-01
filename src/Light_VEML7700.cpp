@@ -225,6 +225,7 @@ uint16_t Light_VEML7700::getHighThreshold(void) {
   {
     return  0XFF;
   }
+  return getHighThresholdData;
 }
 
 /*!
